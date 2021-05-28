@@ -12,9 +12,9 @@
       </div>
     </div>
     <div v-else-if="currentGame !== null" class="bg-white xl:p-5 p-4 rounded-md pt-5 pb-5 mt-5 mb-5" style="width: 42rem">
-      <h2 class="font-primary uppercase text-4xl" v-bind:class="{ 'text-center': !showExplanation }">{{ currentGame.name }}</h2>
-      <div v-if="!showExplanation" class="underline cursor-pointer text-center" v-on:click="showExplanation = true;">show explanation</div>
-      <div v-else class="mt-3 explanation-container" v-html="currentGame.description"></div>
+      <h2 class="game-title font-primary uppercase text-4xl text-center" v-bind:style="{ 'min-width': showExplanation ? 0 : '100%' }">{{ currentGame.name }}</h2>
+      <div class="toggle-explanation underline cursor-pointer text-center" v-on:click="showExplanation = true;" v-bind:style="{ 'max-height': showExplanation ? 0 : '2em' }">Show explanation</div>
+      <div class="mt-3 explanation-container" v-html="currentGame.description" v-bind:style="{ 'max-height': showExplanation ? getExplanationHeight() : 0 }" ref="explanation"></div>
       <div>
         <button @click="dismiss" type="button" class="uppercase mt-3 w-full p-2 rounded-md text-center mx-auto block bg-black text-white" v-bind:class="{ 'max-w-md': !showExplanation }">
           Dismiss
@@ -106,6 +106,9 @@ import Game from "@/models/game.model";
       this.intervalId = null;
       this.playing = false;
     },
+    getExplanationHeight() {
+      return `${this.$refs.explanation.scrollHeight}px`;
+    }
   }
 })
 export default class Index extends Vue {}
@@ -115,6 +118,23 @@ export default class Index extends Vue {}
 
 .jittery {
   animation: jittery 4s infinite;
+}
+
+.game-title {
+  display: inline-block;
+  transition: min-width 1s ease-in-out;
+}
+
+.toggle-explanation {
+  position: relative;
+  bottom: 0;
+  overflow: hidden;
+  transition: max-height .5s ease-in-out;
+}
+
+.explanation-container {
+  overflow: hidden;
+  transition: max-height 1s ease-in-out;
 }
 
 .explanation-container h1 {
