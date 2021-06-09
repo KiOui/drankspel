@@ -1,7 +1,7 @@
 from django.urls import path, include
 from django.views.generic import TemplateView
 
-from website.drankspel.api.views import DialogflowView
+from drankspel.api.views import DialogflowView
 
 urlpatterns = [
     path("", include([path("v1/", include("drankspel.api.v1.urls", namespace="v1")),]),),  # noqa
