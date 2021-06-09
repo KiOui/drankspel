@@ -141,3 +141,4 @@ docker-compose.yml
 backend/database
 backend/database_init/*.sql
 /log
+backend/credentials.google
