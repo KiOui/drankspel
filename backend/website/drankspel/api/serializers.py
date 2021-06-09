@@ -27,4 +27,4 @@ class CamelCaseSerializer(serializers.Serializer):
 class DialogflowResponseSerializer(CamelCaseSerializer):
     """Dialogflow Response serializer."""
 
-    fullfillment_text = serializers.CharField(source="fullfillmentText")
+    fulfillment_text = serializers.CharField(source="fullfillmentText")
