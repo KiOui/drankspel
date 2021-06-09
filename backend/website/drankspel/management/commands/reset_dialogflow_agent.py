@@ -5,14 +5,20 @@ from django.conf import settings
 from drankspel.services import get_intent_by_name
 
 
-class Command(BaseCommand):
-    help = 'Reset the Dialogflow agent'
+class ResetDialogflowCommand(BaseCommand):
+    """Command to reset the Dialogflow agent."""
+
+    help = "Reset the Dialogflow agent"
 
     def add_arguments(self, parser):
-        parser.add_argument('-f', '--force', action='store_true', help="Whether or not to override intents (if already created).")
+        """Add arguments."""
+        parser.add_argument(
+            "-f", "--force", action="store_true", help="Whether or not to override intents (if already created)."
+        )
 
     def handle(self, *args, **kwargs):
-        force = kwargs.get('force')
+        """Handle the command."""
+        force = kwargs.get("force")
         client = IntentsClient.from_service_account_file(settings.GOOGLE_CREDENTIALS_FILE)
         parent = client.project_agent_path(settings.GOOGLE_AGENT_NAME)
         intents = client.list_intents(parent)
@@ -24,12 +30,13 @@ class Command(BaseCommand):
             random_drinking_game_intent = {
                 "display_name": "Random drinking game",
                 "webhook_state": True,
-                "training_phrases": [{"parts": [{"text": settings.GOOGLE_INTENT_TRAINING_PHRASE}]}]
+                "training_phrases": [{"parts": [{"text": settings.GOOGLE_INTENT_TRAINING_PHRASE}]}],
             }
             print("Creating 'Random drinking game' intent")
             client.create_intent(parent, random_drinking_game_intent)
             print("'Random drinking game' intent created successfully")
         else:
-            print("Skipping adding intent 'Random drinking game' because it already exists (run with --force to "
-                  "override)")
-
+            print(
+                "Skipping adding intent 'Random drinking game' because it already exists (run with --force to "
+                "override)"
+            )
