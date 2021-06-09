@@ -9,5 +9,5 @@ class DialogflowView(APIView):
         return Response(status=status.HTTP_200_OK)
 
     def post(self, request, **kwargs):
-        print(request.POST)
+        print(request.data)
         return Response(status=status.HTTP_200_OK)
