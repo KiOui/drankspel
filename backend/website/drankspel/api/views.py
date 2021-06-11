@@ -1,11 +1,8 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-import random
 
-from drankspel.api.serializers import DialogflowResponseSerializer, DialogflowRequestSerializer
-
-from games.models import DrinkingGame
+from drankspel.api.serializers import DialogflowRequestSerializer
 
 from drankspel.dialogflow.services import intent_manager
 
