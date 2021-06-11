@@ -23,8 +23,8 @@ class Command(BaseCommand):
         intents = client.list_intents(parent)
         for intent_name, intent in intent_manager.intents.items():
             existing_intent = get_intent_by_name(intents, intent_name)
-            if existing_intent is not None or force:
-                if existing_intent is not None:
+            if existing_intent is None or force:
+                if existing_intent is not None and force:
                     print("Removing intent '{}'".format(intent_name))
                     client.delete_intent(existing_intent.name)
                 print("Creating '{}' intent".format(intent_name))
