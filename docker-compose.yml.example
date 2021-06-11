@@ -41,6 +41,7 @@ services:
             - './static:/drankspel/src/website/static/'
             - './media:/drankspel/src/website/media/'
             - './log/:/drankspel/log/'
+            - './credentials.google:/drankspel/credentials.google'
         environment:
             DJANGO_SECRET_KEY: '[INSERT DJANGO SECRET KEY]'
             POSTGRES_HOST: 'drankspel_postgres'
@@ -49,6 +50,10 @@ services:
             POSTGRES_PASSWORD: '[INSERT POSTGRES PASSWORD]'
             VIRTUAL_HOST: '[INSERT HOSTNAME]'
             VIRTUAL_PROTO: 'uwsgi'
+            GOOGLE_APPLICATION_CREDENTIALS: '/drankspel/credentials.google'
+            GOOGLE_AGENT_NAME: '[INSERT GOOGLE AGENT NAME]'
+            GOOGLE_INTENT_TRAINING_PHRASE: 'Give me a random drinking game'
+            GOOGLE_INTENT_RESPONSE_PHRASE: 'Okay, here you go: {}'
         
         networks:
         - backend-django-drankspel

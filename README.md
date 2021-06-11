@@ -54,3 +54,26 @@ Before starting the `nginx` process, the docker environment variables will be se
 ### Using environment variables for the frontend
 
 To use environment variables that can be set during runtime (with docker environment variables), add the variable to the `docker.blueprint.env` file as explained above. Then use the `getEnvVar` function in `src/util/env.ts` for getting the value of an environment variable. This function will first check wether it is set in the `window.__env__` variable and will then look if it is an environment variable.
+
+## Voice assistants
+
+The backend of this project supports the uses of Voice assistants to interact with the drinking games registered. Look at the method below to find out how to use them on your platform.
+
+### Siri
+
+Siri natively support [shortcuts](https://support.apple.com/guide/shortcuts/welcome/ios). It is very easy to interact with this project via Siri. Setup a shortcut in the Shortcuts app on iOS. Alternatively, you can use this [link](https://www.icloud.com/shortcuts/3e0d01e6408140cdb41a895e4c752823) to import a Dutch version of the shortcut (change the trigger to English for an English version).
+
+### Google Assistant
+
+The Google Assistant side of this project is more complex, as Google has more features for adding Voice assistants to its own Google Assistant. We will be using [Dialogflow](https://dialogflow.cloud.google.com) for interacting with our voice assistant. The steps how to set this up are displayed below:
+
+1. Setup a voice assistant on Google's [Dialogflow platform](https://dialogflow.cloud.google.com).
+2. Make sure to setup a [service account](https://cloud.google.com/docs/authentication/getting-started ) for the Dialogflow project such that our application can interact with it later.
+3. Download the JSON key file and set the `GOOGLE_APPLICATION_CREDENTIALS` environment variable (either in the `docker-compose.yml` file or on your own machine) to the absolute path to the credentials file.
+4. Set the `GOOGLE_AGENT_NAME` environment variable to the name of the agent displayed in the Dialogflow console.
+5. Set the `GOOGLE_INTENT_TRIGGER` environment variable to the trigger value (such as `Give a random drinking game`).
+6. Set the `GOOGLE_INTENT_RESPONSE` environment variable to the response value (such as `Here is your drinking game: {}`). Note that the response will be formatted by Python, and using `{}` is obligatory (the random drinking game will be substituted with it).
+7. Run the server.
+8. Execute `manage.py reset_dialgflow_agent` to create the needed intent within Dialogflow.
+9. Setup the fullfillment URL within the Fullfillment tab in the Dialogflow console. Make sure your URL ends in `/api/dialogflow` (the endpoint for dialogflow is located there).
+10. You can now try out the Voice assistant in the Dialogflow console and add it to your phone.
