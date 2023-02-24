@@ -34,7 +34,7 @@ Now your server is setup and running on `localhost:8000`. The administrator inte
 6. Note that you might need to setup a `.env` file in the root of the cloned repository. The `.env` file will need to look something like the following (for local development):
 
 ```
-VUE_APP_BACKEND_URI=http://localhost:8000
+VUE_APP_BACKEND_URI=http://localhost:8000/api/v1
 ```
 
 ## Docker container
