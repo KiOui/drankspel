@@ -20,7 +20,8 @@ RUN apt-get update && \
     mkdir --parents /drankspel/static/ && \
     chmod +x /usr/local/bin/entrypoint.sh && \
     \
-    curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python && \
+    curl -sSL https://install.python-poetry.org | python3 - && \
+    export PATH="/root/.local/bin:$PATH" && \
     poetry config --no-interaction --no-ansi virtualenvs.create false && \
     poetry install --no-interaction --no-ansi --no-dev
 
