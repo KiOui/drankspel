@@ -48,9 +48,9 @@ class IntentManager:
     def add_all(self, intents: list):
         """Recursively add all Intents in a list of Intents (lists in the lists will be recursively added)."""
         for intent in intents:
-            if type(intent) == Intent:
+            if isinstance(intent, Intent):
                 self.add_intent(intent.name, intent)
-            elif type(intent) == list:
+            elif isinstance(intent, list):
                 self.add_all(intent)
             else:
                 raise RuntimeError("Error while adding intents to intent list. Got type {}.".format(type(intent)))
