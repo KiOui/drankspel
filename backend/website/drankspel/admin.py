@@ -1,4 +1,5 @@
 """Settings for the admin site."""
+
 from django.contrib import admin
 
 
