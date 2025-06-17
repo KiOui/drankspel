@@ -18,13 +18,15 @@ services:
           - backend-django-drankspel
     drankspel-postgres:
         container_name: 'drankspel_postgres'
-        image: 'postgres:11.5'
+        image: 'postgres:17'
         restart: 'always'
         volumes:
             - './backend/database/:/var/lib/postgresql/data/'
             - './backend/database_init/:/docker-entrypoint-initdb.d/'
         environment:
-            PGDATA: '/var/lib/postgresql/data/pgdata'
+            POSTGRES_USER: django
+            POSTGRES_PASSWORD: '[INSERT POSTGRES PASSWORD]'
+            POSTGRES_DB: django
         networks:
           - backend-django-drankspel
 

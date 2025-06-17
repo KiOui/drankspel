@@ -23,7 +23,7 @@ jobs:
     - uses: docker/setup-buildx-action@v3
     - uses: docker/build-push-action@v5
       with:
-        context: .
+        context: ./backend
         cache-from: type=gha
         cache-to: type=gha,mode=max
         push: true
@@ -45,7 +45,7 @@ jobs:
     - uses: docker/setup-buildx-action@v3
     - uses: docker/build-push-action@v5
       with:
-        context: .
+        context: ./frontend
         cache-from: type=gha
         cache-to: type=gha,mode=max
         push: true

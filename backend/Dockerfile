@@ -1,5 +1,4 @@
 FROM python:3.11
-MAINTAINER Lars van Rhijn
 
 ENV PYTHONUNBUFFERED 1
 ENV DJANGO_SETTINGS_MODULE drankspel.settings.production
@@ -23,7 +22,7 @@ RUN apt-get update && \
     curl -sSL https://install.python-poetry.org | python3 - && \
     export PATH="/root/.local/bin:$PATH" && \
     poetry config --no-interaction --no-ansi virtualenvs.create false && \
-    poetry install --no-interaction --no-ansi --no-dev
+    poetry install --with prod --no-interaction --no-ansi
 
 
 COPY website /drankspel/src/website/

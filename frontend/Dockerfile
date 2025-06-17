@@ -1,5 +1,4 @@
 FROM node:18-alpine AS builder
-MAINTAINER Lars van Rhijn <larsvanrhijn@gmail.com>
 LABEL description="Drankspel VueJS application"
 
 WORKDIR /app
