@@ -4,28 +4,31 @@ version = "0.1.0"
 description = "A random drinking game picker"
 authors = ["Lars van Rhijn <larsvanrhijn@gmail.com>"]
 license = "MIT"
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.11"
-Django = "^4.2.10"
-uWSGI = "^2.0.19"
-psycopg2-binary = "^2.8.6"
-djangorestframework = "^3.12.4"
-django-oauth-toolkit = "^2.2.0"
-uritemplate = "^4.1.1"
-django-cors-headers = "^3.7.0"
-django-tinymce = "^3.5.0"
-dialogflow = "^1.1.0"
+django = "^5.2.3"
+djangorestframework = "^3.16.0"
+django-oauth-toolkit = "^3.0.1"
+uritemplate = "^4.2.0"
+django-cors-headers = "^4.7.0"
+django-tinymce = "^4.1.0"
+dialogflow = "^2.0.0"
 
-[tool.poetry.dev-dependencies]
-pydocstyle = "^6.1.1"
-black = "^22.3.0"
-flake8 = "^6.0.0"
-coverage = "^6.5.0"
+[tool.poetry.group.dev.dependencies]
+pydocstyle = "^6.3.0"
+black = "^25.1.0"
+flake8 = "^7.0.0"
+coverage = "^7.9.1"
+
+[tool.poetry.group.prod.dependencies]
+uWSGI = "^2.0.30"
+psycopg2-binary = "^2.9.10"
 
 [tool.black]
 line-length = 119
-target-version = ["py37"]
+target-version = ["py311"]
 exclude = '''
 /(
   migrations
@@ -34,5 +37,5 @@ exclude = '''
 '''
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
