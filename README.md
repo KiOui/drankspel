@@ -8,7 +8,7 @@ This project is built using both [Django](https://github.com/django/django) for 
 
 ### Setup backend
 
-0. Get at least [Python](https://www.python.org) 3.8 installed on your system.
+0. Get at least [Python](https://www.python.org) 3.11 installed on your system.
 1. Clone this repository.
 2. If `pip3` is not installed on your system yet, execute `apt install python3-pip` on your system.
 3. Also make sure `python3-dev` is installed on your system, execute `apt install python3-dev`.
