@@ -1,34 +1,38 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-set -e
+echo "🔍 Checking database connection..."
+uv run manage.py check --database=default
 
-until pg_isready --host="${POSTGRES_HOST}" --username="${POSTGRES_USER}" --quiet; do
-    sleep 1;
-done
+echo "📊 Checking migration status..."
+uv run manage.py showmigrations --plan
 
-touch -a /drankspel/log/uwsgi.log
-touch -a /drankspel/log/django.log
+echo "🚀 Running migrations..."
+uv run manage.py migrate --noinput
 
-cd /drankspel/src/website
+touch -a /log/uwsgi.log
+touch -a /log/django.log
 
-./manage.py migrate --no-input
+chown --recursive nobody:nogroup /log/
 
-chown --recursive www-data:www-data /drankspel/
+chown --recursive nobody:nogroup /app
 
-echo "Starting uwsgi server."
-uwsgi --chdir=/drankspel/src/website \
+echo "🌐 Starting uWSGI server..."
+uv run uwsgi --chdir=/app \
     --module=drankspel.wsgi:application \
     --master --pidfile=/tmp/project-master.pid \
     --socket=:8000 \
     --processes=5 \
-    --uid=www-data --gid=www-data \
-    --harakiri=20 \
+    --uid=nobody --gid=nogroup \
+    --harakiri=60 \
     --post-buffering=16384 \
     --max-requests=5000 \
     --thunder-lock \
     --vacuum \
     --logfile-chown \
-    --logto2=/drankspel/log/uwsgi.log \
+    --logto2=/log/uwsgi.log \
     --ignore-sigpipe \
     --ignore-write-errors \
-    --disable-write-exception
+    --disable-write-exception \
+    --enable-threads \
+    --py-call-uwsgi-fork-hooks \
+    --buffer-size 32768
