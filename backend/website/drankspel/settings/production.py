@@ -56,19 +56,26 @@ DATABASES = {
     }
 }
 
+# Logging
+# https://docs.djangoproject.com/en/3.2/topics/logging/
+
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
     "handlers": {
         "file": {
-            "level": "INFO",
+            "level": "ERROR",
             "class": "logging.FileHandler",
-            "filename": "/drankspel/log/django.log",
+            "filename": "/log/django.log",
         },
     },
     "loggers": {
-        "": {"handlers": ["file"], "level": "DEBUG", "propagate": True,},  # noqa
-    },  # noqa
+        "django": {
+            "handlers": ["file"],
+            "level": "ERROR",
+            "propagate": True,
+        },
+    },
 }
 
 # Static files (CSS, JavaScript, Images)
