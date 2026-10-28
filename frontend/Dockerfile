@@ -1,12 +1,12 @@
-FROM node:18-alpine AS builder
+FROM node:26-alpine AS builder
 LABEL description="Drankspel VueJS application"
 
 WORKDIR /app
-COPY package.json yarn.lock ./
-RUN yarn install
+COPY package.json package-lock.json ./
+RUN npm install
 # Include the .env file for build-time environment variables
 COPY . ./
-RUN yarn build
+RUN npm run build
 
 FROM nginx
 WORKDIR /usr/share/nginx/html

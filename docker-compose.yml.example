@@ -68,7 +68,7 @@ services:
           - 'drankspel-nginx'
           - 'drankspel-django'
         environment:
-            VUE_APP_BACKEND_URI: "[INSERT BACKEND URI]"
+            VITE_APP_BACKEND_URI: "[INSERT BACKEND URI]"
         networks:
         - backend-django-drankspel
 

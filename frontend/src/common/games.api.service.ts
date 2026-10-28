@@ -1,5 +1,5 @@
 import ApiService from "@/common/api.service";
-import Game from "@/models/game.model";
+import type { Game } from "@/models/game.model";
 
 class _GamesApiService {
   _apiService: typeof ApiService;

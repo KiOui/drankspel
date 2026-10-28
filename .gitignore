@@ -142,3 +142,6 @@ backend/database
 backend/database_init/*.sql
 /log
 backend/credentials.google
+
+# Node modules
+frontend/node_modules
