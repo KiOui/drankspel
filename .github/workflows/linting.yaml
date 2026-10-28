@@ -5,8 +5,8 @@ on:
   - push
 
 jobs:
-  lint:
-    name: "Linting"
+  lint-backend:
+    name: "Lint backend"
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -42,3 +42,32 @@ jobs:
           --exclude="migrations,website/drankspel/settings/*.py"
           --max-line-length=119
           website
+
+  frontend-lint:
+    name: "Lint frontend"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend
+    steps:
+      - name: "Checkout the repository"
+        uses: actions/checkout@v4
+
+      - name: "Set up Node.js"
+        uses: actions/setup-node@v4
+        with:
+          node-version: 26
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: "Install frontend dependencies"
+        run: npm ci
+
+      - name: "Run lint"
+        run: npm run lint
+
+      - name: "Run format"
+        run: npm run format
+
+      - name: "Run type-check"
+        run: npm run type-check

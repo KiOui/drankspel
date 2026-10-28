@@ -1,4 +1,5 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import axios from "axios";
+import type { AxiosRequestConfig, AxiosResponse } from "axios";
 import getEnvVar from "@/util/env";
 
 class _ApiService {
@@ -14,14 +15,14 @@ class _ApiService {
 
   async post<T>(
     resource: string,
-    data: Record<string, unknown>
+    data: Record<string, unknown>,
   ): Promise<AxiosResponse<T>> {
     return axios.post(`${this.baseUri}${resource}`, data);
   }
 
   async put<T>(
     resource: string,
-    data: Record<string, unknown>
+    data: Record<string, unknown>,
   ): Promise<AxiosResponse<T>> {
     return axios.put(`${this.baseUri}${resource}`, data);
   }
@@ -35,6 +36,6 @@ class _ApiService {
   }
 }
 
-const ApiService = new _ApiService(getEnvVar("VUE_APP_BACKEND_URI"));
+const ApiService = new _ApiService(getEnvVar("VITE_APP_BACKEND_URI"));
 
 export default ApiService;

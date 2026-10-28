@@ -1,17 +1,15 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import Index from "../views/Index.vue";
-
-const routes: Array<RouteRecordRaw> = [
-  {
-    path: "/",
-    name: "Home",
-    component: Index,
-  },
-];
+import { createRouter, createWebHistory } from "vue-router";
+import Index from "../views/IndexView.vue";
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
-  routes,
+  history: createWebHistory(import.meta.env.BASE_URL),
+  routes: [
+    {
+      path: "/",
+      name: "home",
+      component: Index,
+    },
+  ],
 });
 
 export default router;
